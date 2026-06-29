@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sky-hopper.lakshyasingh2567.workers.dev/sitemap.xml
