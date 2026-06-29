@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sky Hopper - Free Online Jumping Game</title>
+  <meta name="description" content="Play Sky Hopper, a free online jumping game. Move left and right, collect coins, land on platforms, beat your high score, and enjoy a mobile-friendly browser game." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <h1>Sky Hopper - Free Online Jumping Game</h1>
+    <p class="intro">Move left and right, collect coins, and survive as long as you can.</p>
+
+    <div class="game-box">
+      <canvas id="gameCanvas"></canvas>
+
+      <div class="mobile-controls">
+        <button id="leftBtn" class="control-btn" aria-label="Move Left">←</button>
+        <button id="rightBtn" class="control-btn" aria-label="Move Right">→</button>
+      </div>
+
+      <div id="startScreen" class="screen">
+        <h2>Sky Hopper</h2>
+        <p>Use A/D, Arrow Keys, or mobile buttons</p>
+        <button id="startBtn">Start Game</button>
+      </div>
+
+      <div id="gameOverScreen" class="screen hidden">
+        <h2>Game Over</h2>
+        <p>Score: <span id="finalScore">0</span></p>
+        <p>High Score: <span id="highScoreText">0</span></p>
+        <button id="restartBtn">Play Again</button>
+      </div>
+    </div>
+
+    <section>
+      <h2>How to Play</h2>
+      <p>Control the character using the left and right buttons on mobile, or A/D and arrow keys on desktop. The character jumps automatically after landing on platforms. Collect coins and avoid falling.</p>
+    </section>
+
+    <section>
+      <h2>Game Features</h2>
+      <p>Sky Hopper is a free online jumping game with endless gameplay, coins, high score tracking, mobile controls, background music, sound effects, and increasing difficulty.</p>
+    </section>
+
+    <section>
+      <h2>FAQ</h2>
+      <h3>Is Sky Hopper free?</h3>
+      <p>Yes, Sky Hopper is completely free to play online.</p>
+      <h3>Can I play on mobile?</h3>
+      <p>Yes, Sky Hopper works on mobile, tablet, and desktop browsers.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

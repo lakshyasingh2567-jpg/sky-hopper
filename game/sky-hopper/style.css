@@ -1,0 +1,171 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(circle at top, #b8ecff, #74c7f2 45%, #4da3d9);
+  color: #102033;
+  text-align: center;
+}
+
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 15px 0 5px;
+  background: linear-gradient(90deg, #ff512f, #f09819, #ffe53b, #00dbde, #3a86ff, #8338ec);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 8s linear infinite;
+}
+
+.intro {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+
+.game-box {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 500px;
+  margin: 10px auto;
+  border: 4px solid #102033;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(#9ee7ff, #eefbff);
+  box-shadow: 0 20px 45px rgba(0,0,0,.25);
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  background: rgba(238, 251, 255, 0.88);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen h2 {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, #ff4d6d, #ffbe0b, #00d4ff, #8338ec);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 6s linear infinite;
+}
+
+.screen p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a86ff;
+  padding: 0 18px;
+}
+
+.hidden { display: none; }
+
+button {
+  padding: 13px 34px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff4d6d, #ff7b00, #ffbe0b);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255,123,0,.35);
+  transition: .25s;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(255,123,0,.45);
+}
+
+.mobile-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 18px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.control-btn {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 30px;
+  pointer-events: auto;
+  opacity: 0.82;
+  user-select: none;
+  touch-action: none;
+}
+
+.control-btn:active { transform: scale(0.92); }
+
+section {
+  max-width: 650px;
+  margin: 14px auto;
+  padding: 16px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 18px;
+}
+
+section h2 {
+  font-size: 20px;
+  margin: 4px 0 8px;
+  color: #102033;
+}
+
+section h3 {
+  margin: 12px 0 6px;
+  color: #3a86ff;
+}
+
+section p {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@keyframes rainbow {
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 22px; }
+  .intro { font-size: 14px; }
+  .game-box {
+    max-width: 300px;
+    height: 470px;
+  }
+  .control-btn {
+    width: 58px;
+    height: 58px;
+    font-size: 28px;
+  }
+}
