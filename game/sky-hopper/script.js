@@ -11,8 +11,8 @@ window.onload = function () {
   const leftBtn = document.getElementById("leftBtn");
   const rightBtn = document.getElementById("rightBtn");
 
-  canvas.width = 420;
-  canvas.height = 620;
+ canvas.width = 540;
+canvas.height = 960;
 
   const playerImg = new Image();
   playerImg.src = "assets/images/player.png";
