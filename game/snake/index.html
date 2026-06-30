@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake - Play Free Online Snake Game | PlayPixel Games</title>
+  <meta name="description" content="Play Snake online for free on PlayPixel Games. Eat apples, grow longer, avoid crashing, and beat your best score." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <a href="../../index.html" class="back">← Back</a>
+  <div class="logo">🎮 PLAY<span>PIXEL</span></div>
+</header>
+
+<main class="layout">
+  <section class="game-area">
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <p class="tip">💡 Eat the glowing apple to grow longer!</p>
+  </section>
+
+  <aside class="panel">
+    <div class="stat">
+      <h3>SCORE</h3>
+      <strong id="score">0</strong>
+    </div>
+
+    <div class="stat small">
+      🏆 Best Score <span id="best">0</span>
+    </div>
+
+    <div class="stat small">
+      🐍 Snake Length <span id="length">1</span>
+    </div>
+
+    <div class="stat small">
+      ⚡ Speed <span>Slow</span>
+    </div>
+
+    <div class="controls">
+      <h3>Controls</h3>
+      <button data-dir="up">↑</button>
+      <div>
+        <button data-dir="left">←</button>
+        <button data-dir="down">↓</button>
+        <button data-dir="right">→</button>
+      </div>
+      <p>Use Arrow Keys or Buttons</p>
+    </div>
+
+    <button id="startBtn" class="main-btn">Start Game</button>
+    <button id="restartBtn" class="main-btn secondary">Restart</button>
+  </aside>
+</main>
+
+<section class="info">
+  <h2>About Snake</h2>
+  <p>Snake is a classic arcade game where you control a growing snake. Eat apples, increase your score, and avoid crashing into walls or your own body.</p>
+
+  <h2>How to Play</h2>
+  <p>Use the arrow keys on desktop or the on-screen buttons on mobile. The longer your snake gets, the harder the game becomes.</p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
