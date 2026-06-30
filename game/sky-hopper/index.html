@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Sky Hopper - Play Free Online Jumping Game | PlayPixel Games</title>
-  <meta name="description" content="Play Sky Hopper online for free. Jump across platforms, collect coins, beat your high score, and enjoy a mobile-friendly arcade game." />
+  <meta name="description" content="Play Sky Hopper online for free. Jump across platforms, collect coins, beat your high score, and enjoy a mobile-friendly arcade jumping game." />
+  <meta name="keywords" content="Sky Hopper, jumping game, free online game, arcade game, HTML5 game, mobile game" />
 
   <link rel="stylesheet" href="style.css" />
 
@@ -29,6 +30,28 @@
       margin:0 8px;
     }
 
+    .game-actions{
+      max-width:760px;
+      margin:15px auto;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .game-actions button,
+    .game-actions a{
+      padding:12px 20px;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ff4d6d,#ff7b00,#ffbe0b);
+      color:white;
+      font-weight:bold;
+      cursor:pointer;
+      text-decoration:none;
+      box-shadow:0 8px 18px rgba(255,123,0,.35);
+    }
+
     .game-info{
       max-width:760px;
       margin:20px auto;
@@ -40,12 +63,24 @@
 
     .game-info h2{
       color:#8338ec;
-      margin-top:10px;
+      margin-top:16px;
+      margin-bottom:8px;
     }
 
-    .game-info p, .game-info li{
+    .game-info p,
+    .game-info li{
       font-size:16px;
       line-height:1.6;
+    }
+
+    .rating-box{
+      max-width:760px;
+      margin:15px auto;
+      padding:14px 18px;
+      background:rgba(255,255,255,.55);
+      border-radius:18px;
+      font-weight:bold;
+      color:#102033;
     }
 
     .ad-placeholder{
@@ -60,6 +95,39 @@
       background:rgba(255,255,255,.4);
       color:#555;
       font-size:14px;
+    }
+
+    .related-games{
+      max-width:760px;
+      margin:20px auto;
+      padding:20px;
+      background:rgba(255,255,255,.55);
+      border-radius:20px;
+      text-align:left;
+    }
+
+    .related-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .related-card{
+      background:white;
+      border-radius:16px;
+      padding:18px;
+      text-align:center;
+      color:#102033;
+      text-decoration:none;
+      font-weight:bold;
+      box-shadow:0 8px 18px rgba(0,0,0,.12);
+    }
+
+    .related-card span{
+      display:block;
+      font-size:36px;
+      margin-bottom:8px;
     }
 
     @media(max-width:600px){
@@ -90,9 +158,20 @@
     <h1>Sky Hopper - Free Online Jumping Game</h1>
     <p class="intro">Move left and right, collect coins, and survive as long as you can.</p>
 
+    <div class="rating-box">
+      ⭐ Rating: 4.8/5 &nbsp; | &nbsp; 🎮 Category: Arcade &nbsp; | &nbsp; 📱 Mobile Friendly
+    </div>
+
     <div class="ad-placeholder">Advertisement</div>
 
-    <div class="game-box">
+    <div class="game-actions">
+      <button onclick="scrollToGame()">▶ Play Game</button>
+      <button onclick="openFullscreen()">⛶ Fullscreen</button>
+      <button onclick="copyGameLink()">🔗 Copy Link</button>
+      <button onclick="shareGame()">📤 Share</button>
+    </div>
+
+    <div class="game-box" id="gameArea">
       <canvas id="gameCanvas"></canvas>
 
       <div class="mobile-controls">
@@ -116,15 +195,22 @@
 
     <section class="game-info">
       <h2>About Sky Hopper</h2>
-      <p>Sky Hopper is a free online arcade jumping game where your goal is to stay alive by landing on platforms, collecting coins, and avoiding falls.</p>
+      <p>Sky Hopper is a free online arcade jumping game where your goal is to stay alive by landing on platforms, collecting coins, and avoiding falls. The game is easy to start but gets harder as your score increases.</p>
 
       <h2>How to Play</h2>
-      <p>The character jumps automatically. You only need to control the movement left and right.</p>
+      <p>The character jumps automatically. Your job is to move left and right so the character lands safely on the next platform.</p>
 
       <h2>Controls</h2>
       <ul>
         <li><strong>Desktop:</strong> Use A/D or Arrow Keys.</li>
         <li><strong>Mobile:</strong> Use the left and right buttons on the screen.</li>
+      </ul>
+
+      <h2>Tips & Tricks</h2>
+      <ul>
+        <li>Stay near the center of the screen so you have more time to react.</li>
+        <li>Collect coins when they are safe, but do not risk falling for every coin.</li>
+        <li>Watch the platform gaps carefully as the game becomes faster.</li>
       </ul>
 
       <h2>Game Features</h2>
@@ -135,11 +221,75 @@
         <li>Mobile-friendly controls</li>
         <li>Sound effects and background music</li>
       </ul>
+
+      <h2>FAQ</h2>
+      <p><strong>Is Sky Hopper free?</strong><br>Yes, Sky Hopper is completely free to play online.</p>
+      <p><strong>Can I play Sky Hopper on mobile?</strong><br>Yes, the game works on mobile, tablet, and desktop browsers.</p>
+      <p><strong>Do I need to download anything?</strong><br>No, you can play instantly in your browser.</p>
     </section>
 
     <div class="ad-placeholder">Advertisement</div>
+
+    <section class="related-games">
+      <h2>Related Games</h2>
+
+      <div class="related-grid">
+        <a href="../../index.html" class="related-card">
+          <span>🧩</span>
+          More Games
+        </a>
+
+        <a href="../../index.html" class="related-card">
+          <span>🐍</span>
+          Snake Coming Soon
+        </a>
+
+        <a href="../../index.html" class="related-card">
+          <span>🤖</span>
+          AI Games Soon
+        </a>
+      </div>
+    </section>
   </main>
+
+  <script>
+    function scrollToGame() {
+      document.getElementById("gameArea").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+
+    function openFullscreen() {
+      const gameArea = document.getElementById("gameArea");
+
+      if (gameArea.requestFullscreen) {
+        gameArea.requestFullscreen();
+      } else if (gameArea.webkitRequestFullscreen) {
+        gameArea.webkitRequestFullscreen();
+      } else if (gameArea.msRequestFullscreen) {
+        gameArea.msRequestFullscreen();
+      }
+    }
+
+    function copyGameLink() {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Game link copied!");
+    }
+
+    function shareGame() {
+      if (navigator.share) {
+        navigator.share({
+          title: "Sky Hopper",
+          text: "Play Sky Hopper for free on PlayPixel Games!",
+          url: window.location.href
+        });
+      } else {
+        copyGameLink();
+      }
+    }
+  </script>
 
   <script src="script.js"></script>
 </body>
-</html>
+</html> 
