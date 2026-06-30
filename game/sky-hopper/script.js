@@ -11,8 +11,8 @@ window.onload = function () {
   const leftBtn = document.getElementById("leftBtn");
   const rightBtn = document.getElementById("rightBtn");
 
- canvas.width = 540;
-canvas.height = 960;
+  canvas.width = 540;
+  canvas.height = 960;
 
   const playerImg = new Image();
   playerImg.src = "assets/images/player.png";
@@ -53,40 +53,96 @@ canvas.height = 960;
 
   let player, platforms, coins, particles, score, coinCount, animationId;
   let highScore = Number(localStorage.getItem("skyHopperHighScore")) || 0;
+
   let gravity = 0.55;
-  let jumpPower = -11.8;
-  let moveSpeed = 4.7;
+  let jumpPower = -12.2;
+  let moveSpeed = 5.2;
   let scrollSpeed = 1.15;
   let keys = {};
   let gameRunning = false;
   let cloudOffset = 0;
 
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
   function resetGame() {
-    player = { x: 190, y: 430, width: 36, height: 36, velocityY: jumpPower };
+    player = {
+      x: canvas.width / 2 - 18,
+      y: 720,
+      width: 38,
+      height: 38,
+      velocityY: jumpPower
+    };
 
-    platforms = [
-      { x: 155, y: 470, width: 70, height: 18 },
-      { x: 70, y: 405, width: 62, height: 18 },
-      { x: 245, y: 340, width: 62, height: 18 },
-      { x: 120, y: 275, width: 58, height: 18 },
-      { x: 260, y: 210, width: 55, height: 18 },
-      { x: 80, y: 145, width: 55, height: 18 }
-    ];
-
+    platforms = [];
     coins = [];
     particles = [];
-    platforms.forEach(p => maybeAddCoin(p));
+
+    let x = canvas.width / 2 - 50;
+    let y = 830;
+
+    for (let i = 0; i < 12; i++) {
+      const width = i < 3 ? 105 : 85;
+      const platform = createNextPlatform(x, y, width, i);
+
+      platforms.push(platform);
+      maybeAddCoin(platform);
+
+      x = platform.x;
+      y = platform.y;
+    }
 
     score = 0;
     coinCount = 0;
     scrollSpeed = 1.15;
   }
 
+  function createNextPlatform(previousX, previousY, width, index = 0) {
+    const platformWidth = width || 85;
+
+    let verticalGap;
+
+    if (index < 4) {
+      verticalGap = 65 + Math.random() * 15;
+    } else {
+      verticalGap = 68 + Math.random() * 24;
+    }
+
+    const direction = Math.random() < 0.5 ? -1 : 1;
+    const randomness = Math.random();
+
+    let horizontalMove;
+
+    if (randomness < 0.5) {
+      horizontalMove = 35 + Math.random() * 55;
+    } else if (randomness < 0.85) {
+      horizontalMove = 90 + Math.random() * 55;
+    } else {
+      horizontalMove = 145 + Math.random() * 35;
+    }
+
+    let nextX = previousX + direction * horizontalMove;
+
+    if (nextX < 25 || nextX > canvas.width - platformWidth - 25) {
+      nextX = previousX - direction * horizontalMove;
+    }
+
+    nextX = clamp(nextX, 25, canvas.width - platformWidth - 25);
+
+    return {
+      x: nextX,
+      y: previousY - verticalGap,
+      width: platformWidth,
+      height: 18
+    };
+  }
+
   function maybeAddCoin(platform) {
-    if (Math.random() < 0.55) {
+    if (Math.random() < 0.5) {
       coins.push({
         x: platform.x + platform.width / 2,
-        y: platform.y - 24,
+        y: platform.y - 26,
         radius: 10,
         collected: false,
         spin: Math.random() * 10
@@ -123,14 +179,15 @@ canvas.height = 960;
     coins.forEach(coin => coin.y += scrollSpeed);
     particles.forEach(p => p.y += scrollSpeed);
 
-    scrollSpeed = 1.15 + score * 0.016;
-    if (scrollSpeed > 3) scrollSpeed = 3;
+    scrollSpeed = 1.15 + score * 0.012;
+    if (scrollSpeed > 2.6) scrollSpeed = 2.6;
   }
 
   function addParticles(x, y, color) {
     for (let i = 0; i < 8; i++) {
       particles.push({
-        x, y,
+        x,
+        y,
         vx: (Math.random() - 0.5) * 4,
         vy: (Math.random() - 0.5) * 4,
         life: 25,
@@ -145,6 +202,7 @@ canvas.height = 960;
       p.y += p.vy;
       p.life--;
     });
+
     particles = particles.filter(p => p.life > 0);
   }
 
@@ -158,7 +216,7 @@ canvas.height = 960;
         player.x < platform.x + platform.width &&
         player.x + player.width > platform.x &&
         playerBottom >= platform.y &&
-        previousBottom <= platform.y + scrollSpeed + 6
+        previousBottom <= platform.y + scrollSpeed + 10
       ) {
         player.y = platform.y - player.height;
         player.velocityY = jumpPower;
@@ -188,21 +246,24 @@ canvas.height = 960;
   }
 
   function updatePlatforms() {
-    platforms = platforms.filter(platform => platform.y < canvas.height + 40);
-    coins = coins.filter(coin => coin.y < canvas.height + 40 && !coin.collected);
+    platforms = platforms.filter(platform => platform.y < canvas.height + 60);
+    coins = coins.filter(coin => coin.y < canvas.height + 60 && !coin.collected);
 
-    while (platforms.length < 8) {
-      const highestY = Math.min(...platforms.map(p => p.y));
-      const difficulty = Math.min(score, 100);
-      const platformWidth = Math.max(42, 65 - difficulty * 0.25);
-      const gap = 52 + Math.random() * 18;
+    while (platforms.length < 12) {
+      const highestPlatform = platforms.reduce(
+        (top, p) => (p.y < top.y ? p : top),
+        platforms[0]
+      );
 
-      const newPlatform = {
-        x: Math.random() * (canvas.width - platformWidth),
-        y: highestY - gap,
-        width: platformWidth,
-        height: 18
-      };
+      const difficulty = Math.min(score, 120);
+      const platformWidth = Math.max(60, 95 - difficulty * 0.16);
+
+      const newPlatform = createNextPlatform(
+        highestPlatform.x,
+        highestPlatform.y,
+        platformWidth,
+        6
+      );
 
       platforms.push(newPlatform);
       maybeAddCoin(newPlatform);
@@ -214,7 +275,9 @@ canvas.height = 960;
   }
 
   function checkGameOver() {
-    if (player.y > canvas.height || player.y < -70) endGame();
+    if (player.y > canvas.height + 80 || player.y < -120) {
+      endGame();
+    }
   }
 
   function drawBackground() {
@@ -225,8 +288,8 @@ canvas.height = 960;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     cloudOffset += 0.25;
-    drawCloud((60 + cloudOffset) % 520 - 100, 85, 1);
-    drawCloud((270 + cloudOffset * 0.6) % 520 - 100, 185, 0.75);
+    drawCloud((60 + cloudOffset) % 650 - 120, 100, 1);
+    drawCloud((330 + cloudOffset * 0.6) % 650 - 120, 230, 0.75);
   }
 
   function drawCloud(x, y, s) {
@@ -251,8 +314,10 @@ canvas.height = 960;
   function drawCoins() {
     coins.forEach(coin => {
       if (coin.collected) return;
+
       coin.spin += 0.1;
       const w = 22 + Math.sin(coin.spin) * 5;
+
       if (coinImg.complete) {
         ctx.drawImage(coinImg, coin.x - w / 2, coin.y - 11, w, 22);
       }
@@ -281,13 +346,14 @@ canvas.height = 960;
 
   function drawScore() {
     ctx.fillStyle = "rgba(255,255,255,0.85)";
-    ctx.roundRect(12, 12, 130, 92, 12);
+    ctx.roundRect(12, 12, 145, 94, 12);
     ctx.fill();
+
     ctx.fillStyle = "#123";
     ctx.font = "20px Arial";
-    ctx.fillText("Score: " + Math.floor(score), 22, 38);
-    ctx.fillText("Best: " + highScore, 22, 65);
-    ctx.fillText("Coins: " + coinCount, 22, 92);
+    ctx.fillText("Score: " + Math.floor(score), 22, 40);
+    ctx.fillText("Best: " + highScore, 22, 68);
+    ctx.fillText("Coins: " + coinCount, 22, 96);
   }
 
   function endGame() {
@@ -342,13 +408,19 @@ canvas.height = 960;
   startBtn.onclick = startGame;
   restartBtn.onclick = startGame;
 
-  document.addEventListener("keydown", e => keys[e.code] = true);
-  document.addEventListener("keyup", e => keys[e.code] = false);
+  document.addEventListener("keydown", e => {
+    keys[e.code] = true;
+  });
+
+  document.addEventListener("keyup", e => {
+    keys[e.code] = false;
+  });
 
   leftBtn.addEventListener("pointerdown", e => {
     e.preventDefault();
     holdButton("left", true);
   });
+
   leftBtn.addEventListener("pointerup", () => holdButton("left", false));
   leftBtn.addEventListener("pointerleave", () => holdButton("left", false));
   leftBtn.addEventListener("pointercancel", () => holdButton("left", false));
@@ -357,6 +429,7 @@ canvas.height = 960;
     e.preventDefault();
     holdButton("right", true);
   });
+
   rightBtn.addEventListener("pointerup", () => holdButton("right", false));
   rightBtn.addEventListener("pointerleave", () => holdButton("right", false));
   rightBtn.addEventListener("pointercancel", () => holdButton("right", false));
