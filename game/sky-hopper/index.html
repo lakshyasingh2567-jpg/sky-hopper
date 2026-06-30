@@ -3,14 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sky Hopper - Free Online Jumping Game</title>
-  <meta name="description" content="Play Sky Hopper, a free online jumping game. Move left and right, collect coins, land on platforms, beat your high score, and enjoy a mobile-friendly browser game." />
+
+  <title>Sky Hopper - Play Free Online Jumping Game | PlayPixel Games</title>
+  <meta name="description" content="Play Sky Hopper online for free. Jump across platforms, collect coins, beat your high score, and enjoy a mobile-friendly arcade game." />
+
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .site-nav{
+      max-width:1000px;
+      margin:16px auto;
+      padding:14px 20px;
+      background:rgba(255,255,255,.18);
+      border-radius:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      backdrop-filter:blur(10px);
+    }
+
+    .site-nav a{
+      color:#102033;
+      font-weight:700;
+      text-decoration:none;
+      margin:0 8px;
+    }
+
+    .game-info{
+      max-width:760px;
+      margin:20px auto;
+      padding:20px;
+      background:rgba(255,255,255,.65);
+      border-radius:20px;
+      text-align:left;
+    }
+
+    .game-info h2{
+      color:#8338ec;
+      margin-top:10px;
+    }
+
+    .game-info p, .game-info li{
+      font-size:16px;
+      line-height:1.6;
+    }
+
+    .ad-placeholder{
+      max-width:760px;
+      height:90px;
+      margin:25px auto;
+      border:2px dashed rgba(0,0,0,.25);
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.4);
+      color:#555;
+      font-size:14px;
+    }
+
+    @media(max-width:600px){
+      .site-nav{
+        flex-direction:column;
+        gap:10px;
+      }
+
+      .ad-placeholder{
+        height:220px;
+        margin:20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <nav class="site-nav">
+    <strong>🎮 PlayPixel Games</strong>
+    <div>
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../contact.html">Contact</a>
+    </div>
+  </nav>
+
   <main class="page">
     <h1>Sky Hopper - Free Online Jumping Game</h1>
     <p class="intro">Move left and right, collect coins, and survive as long as you can.</p>
+
+    <div class="ad-placeholder">Advertisement</div>
 
     <div class="game-box">
       <canvas id="gameCanvas"></canvas>
@@ -34,23 +114,30 @@
       </div>
     </div>
 
-    <section>
+    <section class="game-info">
+      <h2>About Sky Hopper</h2>
+      <p>Sky Hopper is a free online arcade jumping game where your goal is to stay alive by landing on platforms, collecting coins, and avoiding falls.</p>
+
       <h2>How to Play</h2>
-      <p>Control the character using the left and right buttons on mobile, or A/D and arrow keys on desktop. The character jumps automatically after landing on platforms. Collect coins and avoid falling.</p>
-    </section>
+      <p>The character jumps automatically. You only need to control the movement left and right.</p>
 
-    <section>
+      <h2>Controls</h2>
+      <ul>
+        <li><strong>Desktop:</strong> Use A/D or Arrow Keys.</li>
+        <li><strong>Mobile:</strong> Use the left and right buttons on the screen.</li>
+      </ul>
+
       <h2>Game Features</h2>
-      <p>Sky Hopper is a free online jumping game with endless gameplay, coins, high score tracking, mobile controls, background music, sound effects, and increasing difficulty.</p>
+      <ul>
+        <li>Endless arcade gameplay</li>
+        <li>Coin collection</li>
+        <li>High score tracking</li>
+        <li>Mobile-friendly controls</li>
+        <li>Sound effects and background music</li>
+      </ul>
     </section>
 
-    <section>
-      <h2>FAQ</h2>
-      <h3>Is Sky Hopper free?</h3>
-      <p>Yes, Sky Hopper is completely free to play online.</p>
-      <h3>Can I play on mobile?</h3>
-      <p>Yes, Sky Hopper works on mobile, tablet, and desktop browsers.</p>
-    </section>
+    <div class="ad-placeholder">Advertisement</div>
   </main>
 
   <script src="script.js"></script>
