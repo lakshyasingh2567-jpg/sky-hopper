@@ -5,40 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Flappy Bird - Play Free Online Game | PlayPixel Games</title>
-  <meta name="description" content="Play Flappy Bird online for free on PlayPixel Games. Enjoy this arcade browser game instantly on mobile and desktop." />
+  <meta name="description" content="Play Flappy Bird online for free on PlayPixel Games. Tap, click, or press space to fly through pipes and beat your best score." />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<nav class="nav">
-  <strong>🎮 PlayPixel Games</strong>
-  <a href="../../index.html">Home</a>
-</nav>
+<header class="navbar">
+  <div class="logo">🎮 PlayPixel <span>Games</span></div>
+
+  <nav>
+    <a href="../../index.html">Home</a>
+    <a href="../../games.html">Games</a>
+    <a href="../../categories.html">Categories</a>
+    <a href="../../about.html">About</a>
+    <a href="../../contact.html">Contact</a>
+  </nav>
+</header>
 
 <main class="page">
-  <h1>Flappy Bird</h1>
-  <p class="intro">Play Flappy Bird online for free.</p>
+  <section class="title-section">
+    <h1>🐤 Flappy Bird</h1>
+    <p>Play Flappy Bird online for free. How far can you go?</p>
+  </section>
 
-  <div class="ad">Advertisement</div>
+  <section class="play-layout">
+    <div class="game-frame">
+      <canvas id="flappyCanvas" width="720" height="480"></canvas>
+    </div>
 
-  <section class="game-box">
-    <h2>Game Area</h2>
-    <p>Paste or build your game here.</p>
+    <aside class="side-panel">
+      <div class="score-box">
+        <h3>🏆 Score</h3>
+        <strong id="scoreText">0</strong>
+      </div>
+
+      <div class="score-box">
+        <h3>⭐ Best</h3>
+        <strong id="bestText">0</strong>
+      </div>
+
+      <button id="startBtn">▶ Start Game</button>
+      <button id="restartBtn">↻ Restart</button>
+
+      <div class="how">
+        <h3>💡 How to Play</h3>
+        <p>Tap / Click / Space to fly</p>
+      </div>
+    </aside>
   </section>
 
   <section class="info">
     <h2>About Flappy Bird</h2>
-    <p>Flappy Bird is a free online arcade game playable directly in your browser.</p>
+    <p>Flappy Bird is a simple but challenging arcade game. Tap to keep the bird flying and avoid hitting the pipes.</p>
 
     <h2>How to Play</h2>
-    <p>Use keyboard, mouse, or mobile controls depending on the game.</p>
-
-    <h2>FAQ</h2>
-    <p><strong>Is Flappy Bird free?</strong><br>Yes, it is free to play online.</p>
-  </section>
-
-  <div class="ad">Advertisement</div>
+    <p>Press Space, click, or tap the screen to make the bird fly. Time your jumps carefully and try to beat your best score.</p>
+</section>
 </main>
 
 <script src="script.js"></script>

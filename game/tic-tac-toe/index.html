@@ -4,49 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Tic Tac Toe - Play Free Online Puzzle Game | PlayPixel Games</title>
-  <meta name="description" content="Play Tic Tac Toe online for free on PlayPixel Games. Enjoy this puzzle browser game instantly on mobile and desktop." />
+  <title>PlayPixel Games - Tic Tac Toe</title>
+  <meta name="description" content="Play Tic Tac Toe online for free on PlayPixel Games. A classic two-player puzzle game with a modern pixel style." />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<nav class="game-nav">
-  <strong>🎮 PlayPixel Games</strong>
-  <div>
+<header class="navbar">
+  <div class="logo">🎮 PlayPixel <span>Games</span></div>
+  <nav>
     <a href="../../index.html">Home</a>
-    <a href="../sky-hopper/">Sky Hopper</a>
-    <a href="../2048/">2048</a>
-    <a href="../snake/">Snake</a>
-  </div>
-</nav>
+    <a href="../../games.html">Games</a>
+    <a href="../../categories.html">Categories</a>
+    <a href="../../about.html">About</a>
+    <a href="../../contact.html">Contact</a>
+  </nav>
+</header>
 
-<main class="page">
-  <h1>Tic Tac Toe</h1>
-  <p class="intro">Play Tic Tac Toe online for free.</p>
+<main class="game-page">
+  <section class="game-card">
+    <h1>👾 TIC TAC TOE</h1>
+    <p class="subtitle">Classic two player game. Get 3 in a row to win!</p>
 
-  <div class="ad-slot">Advertisement</div>
+    <div class="game-layout">
+      <div class="board" id="board">
+        <button class="cell" data-index="0"></button>
+        <button class="cell" data-index="1"></button>
+        <button class="cell" data-index="2"></button>
+        <button class="cell" data-index="3"></button>
+        <button class="cell" data-index="4"></button>
+        <button class="cell" data-index="5"></button>
+        <button class="cell" data-index="6"></button>
+        <button class="cell" data-index="7"></button>
+        <button class="cell" data-index="8"></button>
+      </div>
 
-  <section class="game-wrapper">
-    <div class="game-placeholder">
-      <h2>Tic Tac Toe</h2>
-      <p>Paste or import the real game engine here.</p>
+      <aside class="side-panel">
+        <div class="panel-box">
+          <h3>Status</h3>
+          <p id="statusText">X's Turn</p>
+        </div>
+
+        <div class="panel-box">
+          <h3>Score</h3>
+          <div class="score-row">
+            <span class="x-score">X: <b id="xScore">0</b></span>
+            <span class="o-score">O: <b id="oScore">0</b></span>
+            <span class="draw-score">Draw: <b id="drawScore">0</b></span>
+          </div>
+        </div>
+
+        <button id="restartBtn" class="restart">↻ Restart Game</button>
+      </aside>
     </div>
+
+    <p class="tip">💡 Tip: Click on any empty box to place your mark!</p>
   </section>
 
   <section class="info">
     <h2>About Tic Tac Toe</h2>
-    <p>Tic Tac Toe is a free online puzzle game you can play directly in your browser without downloading anything.</p>
+    <p>Tic Tac Toe is a classic puzzle game where two players take turns placing X and O on a 3×3 board. The first player to get three marks in a row wins.</p>
 
     <h2>How to Play</h2>
-    <p>Use keyboard, mouse, touch, or on-screen controls depending on the game.</p>
-
-    <h2>FAQ</h2>
-    <p><strong>Is Tic Tac Toe free?</strong><br>Yes, Tic Tac Toe is free to play online.</p>
-    <p><strong>Do I need to download anything?</strong><br>No, the game runs directly in your browser.</p>
-  </section>
-
-  <div class="ad-slot">Advertisement</div>
+    <p>Player X starts first. Click any empty square to place your mark. Try to complete a row, column, or diagonal before your opponent.</p>
+</section>
 </main>
 
 <script src="script.js"></script>
