@@ -6,166 +6,222 @@ const title = process.argv[3];
 const category = process.argv[4] || "Arcade";
 
 if (!slug || !title) {
-  console.log('Usage: node add-game.js "game-slug" "Game Title" "Category"');
+  console.log('\nUsage: node add-game.js game-slug "Game Title" "Category"\n');
   process.exit(1);
 }
 
-const gameDir = path.join(__dirname, "game", slug);
+const ROOT = __dirname;
+const gameDir = path.join(ROOT, "game", slug);
+const homePath = path.join(ROOT, "index.html");
+const sitemapPath = path.join(ROOT, "sitemap.xml");
 
-if (!fs.existsSync(gameDir)) {
-  fs.mkdirSync(gameDir, { recursive: true });
-}
+const gameUrl = `game/${slug}/`;
+const liveUrl = `https://sky-hopper.lakshyasingh2567.workers.dev/game/${slug}/`;
 
-const indexPath = path.join(gameDir, "index.html");
-const stylePath = path.join(gameDir, "style.css");
-const scriptPath = path.join(gameDir, "script.js");
+fs.mkdirSync(gameDir, { recursive: true });
 
-if (!fs.existsSync(indexPath)) {
-  fs.writeFileSync(indexPath, `<!DOCTYPE html>
+createGameFiles();
+updateHomepage();
+updateSitemap();
+
+console.log(`\n✅ ${title} setup complete!`);
+console.log(`📁 Folder: game/${slug}/`);
+console.log(`🌐 Local: http://127.0.0.1:5500/game/${slug}/`);
+console.log(`\nNext: paste/import the real game engine inside game/${slug}/\n`);
+
+function createGameFiles() {
+  const indexFile = path.join(gameDir, "index.html");
+  const styleFile = path.join(gameDir, "style.css");
+  const scriptFile = path.join(gameDir, "script.js");
+
+  if (!fs.existsSync(indexFile)) {
+    fs.writeFileSync(indexFile, `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>${title} - Play Free Online Game | PlayPixel Games</title>
+  <title>${title} - Play Free Online ${category} Game | PlayPixel Games</title>
   <meta name="description" content="Play ${title} online for free on PlayPixel Games. Enjoy this ${category.toLowerCase()} browser game instantly on mobile and desktop." />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<nav class="nav">
+<nav class="game-nav">
   <strong>🎮 PlayPixel Games</strong>
-  <a href="../../index.html">Home</a>
+  <div>
+    <a href="../../index.html">Home</a>
+    <a href="../sky-hopper/">Sky Hopper</a>
+    <a href="../2048/">2048</a>
+    <a href="../snake/">Snake</a>
+  </div>
 </nav>
 
 <main class="page">
   <h1>${title}</h1>
   <p class="intro">Play ${title} online for free.</p>
 
-  <div class="ad">Advertisement</div>
+  <div class="ad-slot">Advertisement</div>
 
-  <section class="game-box">
-    <h2>Game Area</h2>
-    <p>Paste or build your game here.</p>
+  <section class="game-wrapper">
+    <div class="game-placeholder">
+      <h2>${title}</h2>
+      <p>Paste or import the real game engine here.</p>
+    </div>
   </section>
 
   <section class="info">
     <h2>About ${title}</h2>
-    <p>${title} is a free online ${category.toLowerCase()} game playable directly in your browser.</p>
+    <p>${title} is a free online ${category.toLowerCase()} game you can play directly in your browser without downloading anything.</p>
 
     <h2>How to Play</h2>
-    <p>Use keyboard, mouse, or mobile controls depending on the game.</p>
+    <p>Use keyboard, mouse, touch, or on-screen controls depending on the game.</p>
 
     <h2>FAQ</h2>
-    <p><strong>Is ${title} free?</strong><br>Yes, it is free to play online.</p>
+    <p><strong>Is ${title} free?</strong><br>Yes, ${title} is free to play online.</p>
+    <p><strong>Do I need to download anything?</strong><br>No, the game runs directly in your browser.</p>
   </section>
 
-  <div class="ad">Advertisement</div>
+  <div class="ad-slot">Advertisement</div>
 </main>
 
 <script src="script.js"></script>
 </body>
 </html>`);
-}
+  }
 
-if (!fs.existsSync(stylePath)) {
-  fs.writeFileSync(stylePath, `* {
+  if (!fs.existsSync(styleFile)) {
+    fs.writeFileSync(styleFile, `* {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #050014;
+  background: radial-gradient(circle at top, #17002e, #020008 75%);
   color: white;
   text-align: center;
 }
 
-.nav {
-  max-width: 1000px;
-  margin: 20px auto;
+.game-nav {
+  max-width: 1100px;
+  margin: 18px auto;
   padding: 16px 22px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background: rgba(255,255,255,.08);
-  border-radius: 16px;
+  border: 1px solid rgba(124,58,237,.5);
+  border-radius: 18px;
 }
 
-.nav a {
+.game-nav a {
   color: white;
   text-decoration: none;
+  margin-left: 12px;
   font-weight: bold;
 }
 
 .page {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
-  padding: 20px;
+  padding: 18px;
 }
 
-.game-box,
-.info {
-  margin: 25px auto;
-  padding: 25px;
-  max-width: 760px;
-  background: rgba(255,255,255,.08);
-  border-radius: 20px;
+h1 {
+  font-size: 42px;
+  margin-bottom: 8px;
 }
 
-.ad {
+.intro {
+  color: #c4b5fd;
+  font-size: 18px;
+}
+
+.ad-slot {
   max-width: 760px;
   height: 90px;
-  margin: 25px auto;
-  border: 1px dashed rgba(255,255,255,.3);
+  margin: 24px auto;
+  border: 1px dashed rgba(255,255,255,.35);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #aaa;
+  background: rgba(255,255,255,.05);
+}
+
+.game-wrapper {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 22px;
+  background: #050b1c;
+  border: 2px solid #7c3aed;
+  border-radius: 24px;
+  box-shadow: 0 0 35px rgba(124,58,237,.55);
+}
+
+.game-placeholder {
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255,255,255,.25);
+  border-radius: 18px;
 }
 
 .info {
+  max-width: 800px;
+  margin: 24px auto;
+  padding: 24px;
+  background: white;
+  color: #111827;
+  border-radius: 20px;
   text-align: left;
   line-height: 1.7;
 }
 
+.info h2 {
+  color: #7c3aed;
+}
+
 @media(max-width: 700px) {
-  .nav {
+  .game-nav {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     margin: 12px;
   }
 
-  .ad {
+  .game-nav div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .ad-slot {
     height: 220px;
   }
 }`);
-}
-
-if (!fs.existsSync(scriptPath)) {
-  fs.writeFileSync(scriptPath, `console.log("${title} loaded");`);
-}
-
-updateHomepage(slug, title, category);
-updateSitemap(slug);
-
-console.log(`✅ ${title} added successfully!`);
-console.log(`📁 Folder created: game/${slug}`);
-console.log(`🔗 Local URL: http://127.0.0.1:5500/game/${slug}/`);
-
-function updateHomepage(slug, title, category) {
-  const homePath = path.join(__dirname, "index.html");
-
-  if (!fs.existsSync(homePath)) {
-    console.log("⚠️ index.html not found. Homepage not updated.");
-    return;
   }
+
+  if (!fs.existsSync(scriptFile)) {
+    fs.writeFileSync(scriptFile, `console.log("${title} loaded");`);
+  }
+}
+
+function updateHomepage() {
+  if (!fs.existsSync(homePath)) return;
 
   let home = fs.readFileSync(homePath, "utf8");
 
-  if (home.includes(`game/${slug}/`)) {
-    console.log("ℹ️ Homepage already has this game.");
+  if (home.includes(`href="${gameUrl}"`)) {
+    console.log("ℹ️ Homepage already contains this game.");
     return;
   }
 
@@ -179,36 +235,36 @@ function updateHomepage(slug, title, category) {
           <span>${category}</span>
           <span>New</span>
         </div>
-        <a class="play-small" href="game/${slug}/">▶ Play Now</a>
+        <a class="play-small" href="${gameUrl}">▶ Play Now</a>
       </div>
     </div>
 `;
 
-  home = home.replace("</div>\n</section>", `${card}</div>\n</section>`);
+  const marker = `<div class="card" data-name="ai games prompt challenge">`;
+
+  if (home.includes(marker)) {
+    home = home.replace(marker, `${card}\n    ${marker}`);
+  } else {
+    home = home.replace(`</div>\n</section>`, `${card}\n  </div>\n</section>`);
+  }
 
   fs.writeFileSync(homePath, home);
   console.log("✅ Homepage updated.");
 }
 
-function updateSitemap(slug) {
-  const sitemapPath = path.join(__dirname, "sitemap.xml");
+function updateSitemap() {
+  if (!fs.existsSync(sitemapPath)) return;
 
-  if (!fs.existsSync(sitemapPath)) {
-    console.log("⚠️ sitemap.xml not found. Sitemap not updated.");
-    return;
-  }
+let sitemap = fs.readFileSync(sitemapPath, "utf8");
 
-  let sitemap = fs.readFileSync(sitemapPath, "utf8");
-  const url = `https://sky-hopper.lakshyasingh2567.workers.dev/game/${slug}/`;
-
-  if (sitemap.includes(url)) {
-    console.log("ℹ️ Sitemap already has this game.");
+  if (sitemap.includes(liveUrl)) {
+    console.log("ℹ️ Sitemap already contains this game.");
     return;
   }
 
   const entry = `
   <url>
-    <loc>${url}</loc>
+    <loc>${liveUrl}</loc>
   </url>`;
 
   sitemap = sitemap.replace("</urlset>", `${entry}\n</urlset>`);
