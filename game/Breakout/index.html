@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Breakout - Play Free Online Game | PlayPixel Games</title>
+  <meta name="description" content="Play Breakout online for free on PlayPixel Games. Move the paddle, bounce the ball, break neon blocks, and beat your score." />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎮%3C/text%3E%3C/svg%3E">
+</head>
+
+<body>
+<header class="navbar">
+  <div class="logo">🎮 PlayPixel <span>Games</span></div>
+  <nav>
+    <a href="../../index.html">Home</a>
+    <a href="../../games.html">Games</a>
+    <a href="../../categories.html">Categories</a>
+    <a href="../../about.html">About</a>
+    <a href="../../contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="title-section">
+    <h1>💥 Breakout</h1>
+    <p>Break all neon blocks with your metal ball.</p>
+  </section>
+
+  <section class="game-layout">
+    <div class="game-frame">
+      <canvas id="canvas" width="800" height="520"></canvas>
+    </div>
+
+    <aside class="side-panel">
+      <div class="panel-box">
+        <h3>🏆 Score</h3>
+        <strong id="scoreText">0</strong>
+      </div>
+
+      <button id="startBtn">▶ Start Game</button>
+      <button id="restartBtn">↻ Restart</button>
+
+      <div class="panel-box">
+        <h3>Controls</h3>
+        <p>← Move Left</p>
+        <p>→ Move Right</p>
+        <p>Space = Start</p>
+      </div>
+    </aside>
+    <div class="mobile-controls">
+  <button id="mobileLeft">← Left</button>
+  <button id="mobileStart">▶ Start</button>
+  <button id="mobileRight">Right →</button>
+</div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
