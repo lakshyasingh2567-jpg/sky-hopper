@@ -245,7 +245,23 @@ function moveBall() {
       b.visible = false;
       ball.dy *= -1;
       score++;
-      scoreText.textContent = score;
+scoreText.textContent = score;
+playSound(820, 0.07, "square");
+
+const allCleared = bricks.every(brick => !brick.visible);
+
+if (allCleared) {
+  running = false;
+  cancelAnimationFrame(animationId);
+  draw();
+  drawOverlay("Level Complete 🎉");
+
+  setTimeout(() => {
+    ball.speed += 1;
+    resetGame();
+    startGame();
+  }, 1200);
+}
       playSound(820, 0.07, "square");
     }
   });

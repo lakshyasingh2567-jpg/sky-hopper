@@ -195,4 +195,17 @@ button:hover {
     order: 3;
   }
 }
- 
+ .info-section {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 28px;
+  background: white;
+  color: #111827;
+  border-radius: 20px;
+  line-height: 1.7;
+}
+
+.info-section h2 {
+  color: #7c3aed;
+  margin: 14px 0 8px;
+}
